@@ -70,29 +70,26 @@ struct Cache::Impl {
 		void evict () {
 		
 		}
-		std::vector<std::tuple<Cache::key_type key, Cache::val_type val, Cache::index_type size>> cache_map; 
+		std::unordered_map<Cache::key_type, 
+		std::pair<Cache::val_type, Cache::index_type>>;
 
 };
 
-// construct the cache and consequently the cimpl
+// construct the cache and consequently the Impl
 Cache::Cache(Cache::index_type maxmem, Cache::evictor_type evictor = [](){return 0;},
 	hash_func hasher = std::hash<std::string>()) 
 	: pImpl_(new Impl(maxmem, evictor, hasher));
-}
+{
 }; 
-
-struct Cache::Impl {
-
-};
 
 Cache::~Cache(){
 };
 
 void Cache::set(Cache::key_type key, Cache::val_type val, Cache::index_type size){
-	pImpl_->set(key, val, size);
+	pImpl_->set(key, val);
 };
 
-// Call get in C_imPl
+// Call get in Impl
 Cache::val_type Cache::get(Cache::key_type key, Cache::index_type& size){
 	return pImpl_->get(key, size);
 };
