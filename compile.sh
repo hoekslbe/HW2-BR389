@@ -1,4 +1,4 @@
 #compilation script
 
-echo g++ test
-g++ test
+echo g++ _.pp -o _ -Wall -Werror -Wextra -pedantic -O3
+g++ _.pp -o _ -Wall -Werror -Wextra -pedantic -O3
