@@ -1,10 +1,5 @@
 #include "cache.hh"
 
-
-
-// At least there's no pImpl_->pop()
-
-
 struct Cache::Impl {
 
 		Impl(){
@@ -18,10 +13,22 @@ struct Cache::Impl {
 		//do we need to use Cache:: everywhere for the types, or can we define them above?  SHOULD we base them on cache?  
 		// Also, can we just use the map from stdl?  why couldn't we?  Yep, change to map
 		// map of linked lists
+		// 
 		void set(Cache::key_type key, Cache::val_type val, Cache::index_type size){
-			Cache::index_type current_space = space_used();
-			while current_space + size > maxmem:
-			unsigned found_at = find_item(key);
+			auto found_at = cache_map.find(key);
+			if (found_at != cache_map.end()) {
+				// evict the element at found at's position 
+			}
+			// while (space_used + size > maxmem) evict things from 
+			// the cache until there is enough space for the element
+			// we want to add 
+
+			// cache_map[key] = std::pair<val, size> 
+			// increment space_used somehow 
+			while (current_space + size > maxmem) {
+				unsigned found_at = find_item(key);
+			}
+			
 			if (found_at < cache_map.size()) {
 				
 			} else {
@@ -33,10 +40,15 @@ struct Cache::Impl {
 		// or NULL if not found.
 		// sets actual size of the returned value (in bytes) in val_size
 		val_type get(Cache::key_type key, Cache::index_type& size){
-			unsigned found_at = find_item(key);
-			if (found_at < cache_map.size()) {
-				size = cache_map[found_at][2];
-				return cache_map[found_at][1];
+			// return an iterator set to the key element if it exists
+			// and set to the end of the cache_map if it does not
+			auto found_at = cache_map.find(key);
+			if (found_at != cache_map.end()) {
+				// set size reference to the size of the map element
+				size = found_at->second->second;
+				// return value for key at iterator from val, size pair
+				return found_at->second->first;
+
 			} else {
 				return NULL;
 			}
@@ -58,20 +70,28 @@ struct Cache::Impl {
 			}
 			return total_space_used;
 		}
-		unsigned find_item (Cache::key_type key) {
-			unsigned i = 0;
-			for (; i < cache_map.size(), i++) {
-				if (cache_map[i][0] == key) {
-					return i;
-				}
-			} 
-			return i; //i is 1 past the end of cache_map
-		}
+
+		// unsigned find_item (Cache::key_type key) {
+		// 	unsigned i = 0;
+		// 	for (; i < cache_map.size(), i++) {
+		// 		if (cache_map[i][0] == key) {
+		// 			return i;
+		// 		}
+		// 	} 
+		// 	return i; //i is 1 past the end of cache_map
+		// }
 		void evict () {
 		
 		}
-		std::unordered_map<Cache::key_type, 
-		std::pair<Cache::val_type, Cache::index_type>>;
+
+		// evict something specific using the iterator to its position given by find() in the map
+		void evict_at (std::iterator<string, void*>) {
+
+
+		}
+		//std::unordered_map< Cache::key_type, std::pair < Cache::val_type, Cache::index_type > > cache_map;
+		std::unordered_map<std::string, void*> cache_map;
+
 
 };
 
