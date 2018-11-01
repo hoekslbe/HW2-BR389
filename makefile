@@ -1,10 +1,10 @@
-all: cachetest
+all: cachetest_hw3
 
-cachetest: cachetest.o cache.o evictors.o
-	g++ -o cachetest cachetest.o cache.o evictors.o -Wall -Werror -Wextra -pedantic
+cachetest_hw3: cache_test_hw3.o cache.o evictors.o
+	g++ -o cachetest_hw3 cache_test_hw3.o cache.o evictors.o -Wall -Werror -Wextra -pedantic
 
-cachetest.o: cachetest.cpp
-	g++ -c cachetest.cpp -Wall -Werror -Wextra -pedantic
+cache_test_hw3.o: cache_test_hw3.cpp
+	g++ -c cache_test_hw3.cpp -Wall -Werror -Wextra -pedantic
 
 cache.o: cache.cpp evictors.o
 	g++ -c cache.cpp -Wall -Werror -Wextra -pedantic
