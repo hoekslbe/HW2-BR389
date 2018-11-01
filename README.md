@@ -5,6 +5,11 @@ Homework 3 Update:
 Testing: 
 	At the end of homework 2, much of our testing functionality was condensed into a couple of dense tests with lots of asserts. Over this assignment, we learned how to work with the Catch2 testing framework in order to parse out our functionality into more independent, specific tests. On a certain level many of them cannot be completely "independent"-- one can't tell if a "set" is successful, for instance, without performing a "get" after setting the value, to check if it was cached correctly. However, the goal was to make the tests independent in the way that each SECTION of each TEST CASE is looking to flag errors based on a single REQUIRE() condition. We liked utilizing Catch2, we think the tests are much easier to isolate and analyze this way.
 
+files added/changed:
+	catch.hpp: the header file for Catch2
+	cache_test_hw3.cpp: our new testing file
+	makefile: this was changed to use cache_test_hw3.cpp instead of cachetest.cpp
+
 
 2nd Homework Assignment Betsy Hoekstra and Robert McCaull
 
